@@ -8,8 +8,10 @@ from prettytable import PrettyTable
 
 
 
+
 index = 0
 while True:
+    print('******************************* Start Loop *****************************')
     
     URL = "https://api.binance.com/api/v3/ticker/price"
   
@@ -26,9 +28,10 @@ while True:
     
     
     ROC_List=[]
-    from prettytable import PrettyTable
-    A = PrettyTable()
-    A.field_names= ["Symbol","ROC", "End Price", "Start Price"]
+    Aust_roc_list= []
+    
+ 
+   
     if index != 0:
     
         for m,price in enumerate(last_price):
@@ -37,29 +40,53 @@ while True:
             new= last_price[m]
         
             prev_price=( float(previous['price']))
+            aust_prev_price= ( float(previous['price']))*(1.46)
+
             new_price= (float(new['price']))
+            aust_new_price= (float(new['price']))*(1.46)
+            
             ROC= new_price - prev_price
-            temp= {'symbol': previous['symbol'], 'ROC': ROC , "Start Price": prev_price, 'End Price': new_price}
-            A.add_row([previous['symbol'], ROC, prev_price, new_price])
+            Aust_Roc= aust_new_price- aust_prev_price
+            
+            Roc_percent= ((new_price - prev_price)/prev_price)*100
+            aust_Roc_percent= ((aust_new_price - aust_prev_price)/aust_prev_price)*100
+            
+            temp= {'symbol': previous['symbol'], 'ROC': ROC , "Start Price": prev_price, 'End Price': new_price, 'Percentage Change': str(Roc_percent) + '%'}
+            aust_temp= {'symbol': previous['symbol'], 'ROC': Aust_Roc , "Start Price": aust_prev_price, 'End Price': aust_new_price, 'Percentage Change': str(aust_Roc_percent)+'%'}
+
+            
             
             ROC_List.append(temp)
+            Aust_roc_list.append(aust_temp)
+        
+        aust_sorted_list=sorted(Aust_roc_list, key=lambda x: x['ROC'], reverse=True)
         sorted_list=sorted(ROC_List, key=lambda x: x['ROC'], reverse=True)
         
         A = PrettyTable()
-        A.field_names= ["*****Symbol*****","*****ROC*****", "****End Price****", "****Start Price****"]
+        Aust_table = PrettyTable()
+        
+        A.title = ' US Dollar Rate'
+        Aust_table.title= "Australian Dollar Rate"
+        
+        A.field_names= ["*****Symbol*****","*****ROC*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
+        Aust_table.field_names= ["*****Symbol*****","*****ROC*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
+        
+        
         A.max_width['ROC'] = A.max_width['Symbol'] = 100
         A.max_table_width= 150
-        for s in sorted_list:
-            # strRW = '''<tr><td>"+s['symbol']+ "</td><td>"+str(s['ROC'])+"</td><td>"+str(s['Start Price'])+"</td><td>"+str(s['End Price'])+"</td></tr>'''
-            # strTable = strTable+strRW
+        Aust_table.max_width['ROC'] = A.max_width['Symbol'] = 100
+        Aust_table.max_table_width= 150
         
+        for s in sorted_list[:5]:
+            A.add_row([s['symbol'],s['ROC'] , s['Start Price'], s['End Price'], s['Percentage Change']])
+        for aust_s in aust_sorted_list[:5]:
+            Aust_table.add_row([aust_s['symbol'],aust_s['ROC'] ,aust_s['Start Price'], aust_s['End Price'], aust_s['Percentage Change']])
 
-            A.add_row([s['symbol'],s['ROC'] , s['Start Price'], s['End Price']])
-        content=(str(A))
+        content=(str(A)+ str(Aust_table))
         msg = EmailMessage()
         msg['Subject'] = 'Roc of all coins'
-        msg['To'] = 'tjjaccrypto@gmail.com'
-        msg.set_content(str(A))
+        msg['To'] = 'mehrankhan6799@gmail.com'
+        msg.set_content(str(A)+ str(Aust_table))
         print('msg',msg)
         smtp_server = "smtp.gmail.com"
         port = 587  # For starttls
@@ -73,16 +100,18 @@ while True:
                 server.ehlo() # Can be omitted
                 server.login(sender_email, password)
                 server.send_message(msg)
+                
 
         except Exception as e:
                 # Print any error messages to stdout
                 print('Exception',e)
         finally:
                 server.quit()
-
+        print(A)
+        print(Aust_table)
     last_price= r.json()
     index +=1
-    print (A)
-    time.sleep(300)
+    print('******************************* End Loop *****************************')
+    time.sleep(20)
 
 
