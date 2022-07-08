@@ -112,6 +112,6 @@ while True:
     last_price= r.json()
     index +=1
     print('******************************* End Loop *****************************')
-    time.sleep(20)
+    time.sleep(300)
 
 
