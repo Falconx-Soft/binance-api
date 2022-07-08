@@ -85,7 +85,7 @@ while True:
         content=(str(A)+ str(Aust_table))
         msg = EmailMessage()
         msg['Subject'] = 'Roc of all coins'
-        msg['To'] = 'mehrankhan6799@gmail.com'
+        msg['To'] = 'tjjaccrypto@gmail.com'
         msg.set_content(str(A)+ str(Aust_table))
         print('msg',msg)
         smtp_server = "smtp.gmail.com"
