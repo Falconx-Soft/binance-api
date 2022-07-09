@@ -59,14 +59,14 @@ while True:
             ROC_List.append(temp)
             Aust_roc_list.append(aust_temp)
         
-        aust_sorted_list=sorted(Aust_roc_list, key=lambda x: x['ROC'], reverse=True)
-        sorted_list=sorted(ROC_List, key=lambda x: x['ROC'], reverse=True)
+        aust_sorted_list=sorted(Aust_roc_list, key=lambda x: x['Percentage Change'], reverse=True)
+        sorted_list=sorted(ROC_List, key=lambda x: x['Percentage Change'], reverse=True)
         
         A = PrettyTable()
         Aust_table = PrettyTable()
         
-        A.title = ' US Dollar Rate'
-        Aust_table.title= "Australian Dollar Rate"
+        A.title = 'US Rate Binance'
+        Aust_table.title= "Australian Rate Binance"
         
         A.field_names= ["*****Symbol*****","*****ROC*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
         Aust_table.field_names= ["*****Symbol*****","*****ROC*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
@@ -113,6 +113,6 @@ while True:
     last_price= r.json()
     index +=1
     print('******************************* End Loop *****************************')
-    time.sleep(20)
+    time.sleep(600)
 
 
