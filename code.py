@@ -85,7 +85,8 @@ while True:
         content=(str(A)+ str(Aust_table))
         msg = EmailMessage()
         msg['Subject'] = 'Roc of all coins'
-        msg['To'] = 'dawarsardar786@gmail.com'
+        msg['To'] = 'tjjaccrypto@gmail.com'
+        msg['From'] = 'kabocha608@gmail.com'
         msg.set_content(str(A)+ str(Aust_table))
         print('msg',msg)
         smtp_server = "smtp.gmail.com"
@@ -93,20 +94,20 @@ while True:
         sender_email = "kabocha608@gmail.com"
         password = 'oatomvjfzesuawvu'
         context = ssl.create_default_context()
-        # try:
-        server = smtplib.SMTP(smtp_server,port)
-        server.ehlo() # Can be omitted
-        server.starttls(context=context) # Secure the connection
-        server.ehlo() # Can be omitted
-        server.login(sender_email, password)
-        server.send_message(msg)
+        try:
+                server = smtplib.SMTP(smtp_server,port)
+                server.ehlo() # Can be omitted
+                server.starttls(context=context) # Secure the connection
+                server.ehlo() # Can be omitted
+                server.login(sender_email, password)
+                server.send_message(msg)
                 
 
-        # except Exception as e:
-        #         # Print any error messages to stdout
-        #         print('Exception',e)
-        # finally:
-        #         server.quit()
+        except Exception as e:
+                # Print any error messages to stdout
+                print('Exception',e)
+        finally:
+                server.quit()
         print(A)
         print(Aust_table)
     last_price= r.json()
