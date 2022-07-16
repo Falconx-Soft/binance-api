@@ -544,6 +544,7 @@ while True:
     msg = EmailMessage()
     msg['Subject'] = '1 Hour Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['From'] = 'kabocha608@gmail.com'
     msg.set_content(str(A)+ str(Aust)+str(A_base)+str(Aust_base))
     print('msg',msg)
     smtp_server = "smtp.gmail.com"
@@ -572,6 +573,7 @@ while True:
     msg = EmailMessage()
     msg['Subject'] = ' 2 Hour Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['From'] = 'kabocha608@gmail.com'
     msg.set_content(str(A_2h)+ str(Aust_2h)+str(A_base_2h)+str(Aust_base_2h))
     print('msg',msg)
     smtp_server = "smtp.gmail.com"
@@ -600,6 +602,7 @@ while True:
     msg = EmailMessage()
     msg['Subject'] = '4 Hour Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['From'] = 'kabocha608@gmail.com'
     msg.set_content(str(A_4h)+ str(Aust_4h)+str(A_base_4h)+str(Aust_base_4h))
     print('msg',msg)
     smtp_server = "smtp.gmail.com"
@@ -628,6 +631,7 @@ while True:
     msg = EmailMessage()
     msg['Subject'] = '8 Hour Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['From'] = 'kabocha608@gmail.com'
     msg.set_content(str(A_8h)+ str(Aust_8h)+str(A_base_8h)+str(Aust_base_8h))
     print('msg',msg)
     smtp_server = "smtp.gmail.com"
@@ -655,6 +659,7 @@ while True:
     msg = EmailMessage()
     msg['Subject'] = '24 Hour Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['From'] = 'kabocha608@gmail.com'
     msg.set_content(content)
     print('msg',msg)
     smtp_server = "smtp.gmail.com"
@@ -683,6 +688,7 @@ while True:
     msg = EmailMessage()
     msg['Subject'] = ' Two Day Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['From'] = 'kabocha608@gmail.com'
     msg.set_content(str(A_2d)+ str(Aust_2d)+str(A_base_2d)+str(Aust_base_2d))
     print('msg',msg)
     smtp_server = "smtp.gmail.com"
@@ -711,6 +717,7 @@ while True:
     msg = EmailMessage()
     msg['Subject'] = '3 Day Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['From'] = 'kabocha608@gmail.com'
     msg.set_content(str(A_3d)+ str(Aust_3d)+str(A_base_3d)+str(Aust_base_3d))
     print('msg',msg)
     smtp_server = "smtp.gmail.com"
@@ -739,6 +746,7 @@ while True:
     msg = EmailMessage()
     msg['Subject'] = '5 Day Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['From'] = 'kabocha608@gmail.com'
     msg.set_content(str(A_5d)+ str(Aust_5d)+str(A_base_5d)+str(Aust_base_5d))
     print('msg',msg)
     smtp_server = "smtp.gmail.com"

@@ -129,6 +129,7 @@ while True:
         msg = EmailMessage()
         msg['Subject'] = 'Roc of all coins'
         msg['To'] = 'tjjaccrypto@gmail.com'
+        msg['From'] = 'kabocha608@gmail.com'
         msg.set_content(str(A)+ str(Aust_table)+str(A_base)+str(Aust_table_base))
         print('msg',msg)
         smtp_server = "smtp.gmail.com"
