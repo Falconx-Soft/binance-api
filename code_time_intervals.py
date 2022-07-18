@@ -5,6 +5,12 @@ import requests
 from email.message import EmailMessage
 import smtplib, ssl
 from prettytable import PrettyTable
+import random
+import csv
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
+from email.mime.text import MIMEText
+import smtplib,ssl
 
 # ******** Australlian Dollar Rate According to US Dollar
 aus_dollar= 1.48
@@ -237,316 +243,79 @@ while True:
 
     # *************** Sorted List For 5 day
     sorted_list_5d=sorted(data_5d, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+
+
+
+    # ****************************** Creating CSVs*******************************************
     
-    # **************** Table For 1 Hour
-    A = PrettyTable()
-    A.title = ' One Hour Change in Prices'
-
-    A.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    A.max_table_width= 150
-
-    Aust = PrettyTable()
-    Aust.title = ' One Hour Change in Prices ( Australian Dollar)'
-
-    Aust.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust.max_table_width= 150
-
-    for s in sorted_list[:5]:
-        A.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    #  **************** End Table 1 hour
-    # ***************** Table For 2 Hour
     
-    A_2h = PrettyTable()
-    A_2h.title = ' Two Hour Change in Prices'
-
-    A_2h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    A_2h.max_table_width= 150
-
-    Aust_2h = PrettyTable()
-    Aust_2h.title = ' Two Hour Change in Prices ( Australian Dollar)'
-
-    Aust_2h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_2h.max_table_width= 150
-
-    for s in sorted_list_2h[:5]:
-        A_2h.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_2h.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ***************** End Table 2 Hour 
-        # ***************** Table For 4 Hour
+    n = random.randint(0,100000)
+    fields = ['symbol', 'priceChange', 'priceChangePercent', 'openPrice', 'lastPrice']
     
-    A_4h = PrettyTable()
-    A_4h.title = ' Four Hour Change in Prices'
-
-    A_4h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    A_4h.max_table_width= 150
-
-    Aust_4h = PrettyTable()
-    Aust_4h.title = ' Four Hour Change in Prices ( Australian Dollar)'
-
-    Aust_4h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_4h.max_table_width= 150
-
-    for s in sorted_list_4h[:5]:
-        A_4h.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_4h.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ***************** End Table 4 Hour 
-        # ***************** Table For 8 Hour
+    # One Hour Change
+    name_of_csv_1h= 'Data Of 1 Hour Change_'+ str(n)+'.csv'
+    with open(str(name_of_csv_1h), 'w', newline='',errors="ignore") as output_file:
+            dict_writer = csv.DictWriter(output_file, fieldnames= fields, extrasaction='ignore')
+            dict_writer.writeheader()
+            dict_writer.writerows(sorted_list)
+    # 2 Hour Change
+    name_of_csv_2h= 'Data Of 2 Hour Change_'+ str(n)+'.csv'
+    with open(str(name_of_csv_2h), 'w', newline='',errors="ignore") as output_file:
+            dict_writer = csv.DictWriter(output_file, fieldnames= fields, extrasaction='ignore')
+            dict_writer.writeheader()
+            dict_writer.writerows(sorted_list_2h)
+    # 4 Hour Change
+    name_of_csv_4h= 'Data Of 4 Hour Change_'+ str(n)+'.csv'
+    with open(str(name_of_csv_4h), 'w', newline='',errors="ignore") as output_file:
+            dict_writer = csv.DictWriter(output_file, fieldnames= fields, extrasaction='ignore')
+            dict_writer.writeheader()
+            dict_writer.writerows(sorted_list_4h)
+    # 8 Hour Change
+    name_of_csv_8h= 'Data Of 8 Hour Change_'+ str(n)+'.csv'
+    with open(str(name_of_csv_8h), 'w', newline='',errors="ignore") as output_file:
+            dict_writer = csv.DictWriter(output_file, fieldnames= fields, extrasaction='ignore')
+            dict_writer.writeheader()
+            dict_writer.writerows(sorted_list_8h)
+    # 24 Hour Change
+    name_of_csv_24h= 'Data Of 24 Hour Change_'+ str(n)+'.csv'
+    with open(str(name_of_csv_24h), 'w', newline='',errors="ignore") as output_file:
+            dict_writer = csv.DictWriter(output_file, fieldnames= fields, extrasaction='ignore')
+            dict_writer.writeheader()
+            dict_writer.writerows(sorted_list_24h)
+    # 2 Days Change
+    name_of_csv_2d= 'Data Of 2 Days Change_'+ str(n)+'.csv'
+    with open(str(name_of_csv_2d), 'w', newline='',errors="ignore") as output_file:
+            dict_writer = csv.DictWriter(output_file, fieldnames= fields, extrasaction='ignore')
+            dict_writer.writeheader()
+            dict_writer.writerows(sorted_list_2d)
+    # 3 Days Change
+    name_of_csv_3d= 'Data Of 3 Days Change_'+ str(n)+'.csv'
+    with open(str(name_of_csv_3d), 'w', newline='',errors="ignore") as output_file:
+            dict_writer = csv.DictWriter(output_file, fieldnames= fields, extrasaction='ignore')
+            dict_writer.writeheader()
+            dict_writer.writerows(sorted_list_3d)
+    # 5 Days Change
+    name_of_csv_5d= 'Data Of 5 Days Change_'+ str(n)+'.csv'
+    with open(str(name_of_csv_5d), 'w', newline='',errors="ignore") as output_file:
+            dict_writer = csv.DictWriter(output_file, fieldnames= fields, extrasaction='ignore')
+            dict_writer.writeheader()
+            dict_writer.writerows(sorted_list_5d)
     
-    A_8h = PrettyTable()
-    A_8h.title = ' Eight Hour Change in Prices'
+    # ************************** Sending Emails ******************************
 
-    A_8h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    A_8h.max_table_width= 150
-
-    Aust_8h = PrettyTable()
-    Aust_8h.title = ' Eight Hour Change in Prices ( Australian Dollar)'
-
-    Aust_8h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_8h.max_table_width= 150
-
-    for s in sorted_list_8h[:5]:
-        A_8h.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_8h.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ***************** End Table 8 Hour 
-    
-
-    # **************** Table For 24 Hour
-    A_24h = PrettyTable()
-    A_24h.title = ' 24 Hour Change in Prices'
-
-    A_24h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    A_24h.max_table_width= 150
-
-    Aust_24h = PrettyTable()
-    Aust_24h.title = ' 24 Hour Change in Prices ( Australian Dollar)'
-
-    Aust_24h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_24h.max_table_width= 150
-
-    for s in sorted_list_24h[:5]:
-        A_24h.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_24h.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    #  **************** End Table 24 hour
-    # ***************** Table For 2 day
-    
-    A_2d = PrettyTable()
-    A_2d.title = ' Two day Change in Prices'
-
-    A_2d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    A_2d.max_table_width= 150
-
-    Aust_2d = PrettyTable()
-    Aust_2d.title = ' Two day Change in Prices ( Australian Dollar)'
-
-    Aust_2d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_2d.max_table_width= 150
-
-    for s in sorted_list_2d[:5]:
-        A_2d.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_2d.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ***************** End Table 2 day 
-        # ***************** Table For 3 day
-    
-    A_3d = PrettyTable()
-    A_3d.title = ' Three Day Change in Prices'
-
-    A_3d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    A_3d.max_table_width= 150
-
-    Aust_3d = PrettyTable()
-    Aust_3d.title = ' Three day Change in Prices ( Australian Dollar)'
-
-    Aust_3d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_3d.max_table_width= 150
-
-    for s in sorted_list_3d[:5]:
-        A_3d.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_3d.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ***************** End Table 3 days 
-        # ***************** Table For 5 days
-    
-    A_5d = PrettyTable()
-    A_5d.title = ' Five day Change in Prices'
-
-    A_5d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    A_5d.max_table_width= 150
-
-    Aust_5d = PrettyTable()
-    Aust_5d.title = ' Five Day Change in Prices ( Australian Dollar)'
-
-    Aust_5d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_5d.max_table_width= 150
-
-    for s in sorted_list_5d[:5]:
-        A_5d.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_5d.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ***************** End Table 5 day 
-    
-    # print(A)
-    # print(Aust)
-
-    # ***************** For USDT as Base Coin (For 1 Hour)
-    base_list= []
-    for base_index,  base_coin in enumerate(sorted_list):
-        if ( base_coin['symbol'].endswith('USDT')):
-            temp_1= sorted_list[base_index]
-            base_list.append(temp_1)
-    sorted_list_base=sorted(base_list, key=lambda x: abs(float(x['priceChange'])), reverse=True)
-     # For USDT as Base Coin ******* Table
-    A_base = PrettyTable()
-    Aust_base = PrettyTable()
-    A_base.title = ' One Hour Change in Prices (USDT)'
-    Aust_base.title = ' One Hour Change in Prices Australian Dollar  (USDT)'
-    A_base.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_base.field_names= ["*****Symbol*****","*****priceChange*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
-        
-    for s in sorted_list_base[:5]:
-        A_base.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_base.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ************** End USTD Table 1 hour
-    # ***************** For USDT as Base Coin (For 2 Hour)
-    base_list= []
-    for base_index,  base_coin in enumerate(sorted_list_2h):
-        if ( base_coin['symbol'].endswith('USDT')):
-            temp_1= sorted_list_2h[base_index]
-            base_list.append(temp_1)
-    sorted_list_base=sorted(base_list, key=lambda x: abs(float(x['priceChange'])), reverse=True)
-     # For USDT as Base Coin ******* Table
-    A_base_2h = PrettyTable()
-    Aust_base_2h = PrettyTable()
-    A_base_2h.title = ' Two Hour Change in Prices (USDT)'
-    Aust_base_2h.title = ' Two Hour Change in Prices Australian Dollar  (USDT)'
-    A_base_2h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_base_2h.field_names= ["*****Symbol*****","*****priceChange*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
-        
-    for s in sorted_list_base[:5]:
-        A_base_2h.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_base_2h.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ************** End USTD Table 2 hour
-    # ***************** For USDT as Base Coin (For 4 Hour)
-    base_list= []
-    for base_index,  base_coin in enumerate(sorted_list_4h):
-        if ( base_coin['symbol'].endswith('USDT')):
-            temp_1= sorted_list_4h[base_index]
-            base_list.append(temp_1)
-    sorted_list_base=sorted(base_list, key=lambda x: abs(float(x['priceChange'])), reverse=True)
-     # For USDT as Base Coin ******* Table
-    A_base_4h = PrettyTable()
-    Aust_base_4h = PrettyTable()
-    A_base_4h.title = ' Four Hour Change in Prices (USDT)'
-    Aust_base_4h.title = ' Four Hour Change in Prices Australian Dollar  (USDT)'
-    A_base_4h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_base_4h.field_names= ["*****Symbol*****","*****priceChange*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
-        
-    for s in sorted_list_base[:5]:
-        A_base_4h.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_base_4h.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ************** End USTD Table 4 hour
-    # ***************** For USDT as Base Coin (For 8 Hour)
-    base_list= []
-    for base_index,  base_coin in enumerate(sorted_list_8h):
-        if ( base_coin['symbol'].endswith('USDT')):
-            temp_1= sorted_list_8h[base_index]
-            base_list.append(temp_1)
-    sorted_list_base=sorted(base_list, key=lambda x: abs(float(x['priceChange'])), reverse=True)
-     # For USDT as Base Coin ******* Table
-    A_base_8h = PrettyTable()
-    Aust_base_8h = PrettyTable()
-    A_base_8h.title = ' Eight Hour Change in Prices (USDT)'
-    Aust_base_8h.title = ' Eight Hour Change in Prices Australian Dollar  (USDT)'
-    A_base_8h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_base_8h.field_names= ["*****Symbol*****","*****priceChange*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
-        
-    for s in sorted_list_base[:5]:
-        A_base_8h.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_base_8h.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ************** End USTD Table 8 hour
-# ***************** For USDT as Base Coin (For 24 Hour)
-    base_list= []
-    for base_index,  base_coin in enumerate(sorted_list_24h):
-        if ( base_coin['symbol'].endswith('USDT')):
-            temp_1= sorted_list_24h[base_index]
-            base_list.append(temp_1)
-    sorted_list_base=sorted(base_list, key=lambda x: abs(float(x['priceChange'])), reverse=True)
-     # For USDT as Base Coin ******* Table
-    A_base_24h = PrettyTable()
-    Aust_base_24h = PrettyTable()
-    A_base_24h.title = ' 24 Hour Change in Prices (USDT)'
-    Aust_base_24h.title = ' 24 Hour Change in Prices Australian Dollar  (USDT)'
-    A_base_24h.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_base_24h.field_names= ["*****Symbol*****","*****priceChange*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
-        
-    for s in sorted_list_base[:5]:
-        A_base_24h.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_base_24h.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ************** End USTD Table 24 hour
-    # ***************** For USDT as Base Coin (For 2 day)
-    base_list= []
-    for base_index,  base_coin in enumerate(sorted_list_2d):
-        if ( base_coin['symbol'].endswith('USDT')):
-            temp_1= sorted_list_2d[base_index]
-            base_list.append(temp_1)
-    sorted_list_base=sorted(base_list, key=lambda x: abs(float(x['priceChange'])), reverse=True)
-     # For USDT as Base Coin ******* Table
-    A_base_2d = PrettyTable()
-    Aust_base_2d = PrettyTable()
-    A_base_2d.title = ' Two day Change in Prices (USDT)'
-    Aust_base_2d.title = ' Two day Change in Prices Australian Dollar  (USDT)'
-    A_base_2d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_base_2d.field_names= ["*****Symbol*****","*****priceChange*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
-        
-    for s in sorted_list_base[:5]:
-        A_base_2d.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_base_2d.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ************** End USTD Table 2 hour
-    # ***************** For USDT as Base Coin (For 3 Day)
-    base_list= []
-    for base_index,  base_coin in enumerate(sorted_list_3d):
-        if ( base_coin['symbol'].endswith('USDT')):
-            temp_1= sorted_list_3d[base_index]
-            base_list.append(temp_1)
-    sorted_list_base=sorted(base_list, key=lambda x: abs(float(x['priceChange'])), reverse=True)
-     # For USDT as Base Coin ******* Table
-    A_base_3d = PrettyTable()
-    Aust_base_3d = PrettyTable()
-    A_base_3d.title = ' Three Days Change in Prices (USDT)'
-    Aust_base_3d.title = ' Three Days Change in Prices Australian Dollar  (USDT)'
-    A_base_3d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_base_3d.field_names= ["*****Symbol*****","*****priceChange*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
-        
-    for s in sorted_list_base[:5]:
-        A_base_3d.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_base_3d.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ************** End USTD Table 4 hour
-    # ***************** For USDT as Base Coin (For 5 day)
-    base_list= []
-    for base_index,  base_coin in enumerate(sorted_list_5d):
-        if ( base_coin['symbol'].endswith('USDT')):
-            temp_1= sorted_list_5d[base_index]
-            base_list.append(temp_1)
-    sorted_list_base=sorted(base_list, key=lambda x: abs(float(x['priceChange'])), reverse=True)
-     # For USDT as Base Coin ******* Table
-    A_base_5d = PrettyTable()
-    Aust_base_5d = PrettyTable()
-    A_base_5d.title = ' 5 Day Change in Prices (USDT)'
-    Aust_base_5d.title = ' 5 Day Change in Prices Australian Dollar  (USDT)'
-    A_base_5d.field_names= ["*****Symbol*****","*****priceChange*****", "*****Start Price*****", "*****End Price*****", "*****Percentage Change*****"]
-    Aust_base_5d.field_names= ["*****Symbol*****","*****priceChange*****", "****Start Price****", "****End Price****", "*****Percentage Change*****"]
-        
-    for s in sorted_list_base[:5]:
-        A_base_5d.add_row([s['symbol'],(float(s['priceChange'])) , s['openPrice'], s['lastPrice'], s['priceChangePercent']])
-        Aust_base_5d.add_row([s['symbol'],(float(s['priceChange']))* aus_dollar , (float(s['openPrice']))*aus_dollar, (float(s['lastPrice']))*aus_dollar, s['priceChangePercent']])
-    # ************** End USTD Table 8 hour
-
-# ****************** Email For 1 Hour
-    content=(str(A)+ str(Aust)+str(A_base)+str(Aust_base))
-    msg = EmailMessage()
+    # ************ Email For 1 Hour
+    msg = MIMEMultipart()
+    body_part = MIMEText('plain')
     msg['Subject'] = '1 Hour Roc of all coins'
-    msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['To'] = 'developmentmode232@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
-    msg.set_content(str(A)+ str(Aust)+str(A_base)+str(Aust_base))
-    print('msg',msg)
+    # Add body to email
+    msg.attach(body_part)
+    # open and read the CSV file in binary
+    with open(str(name_of_csv_1h),'rb') as file:
+    # Attach the file with filename to the email
+        msg.attach(MIMEApplication(file.read(), Name=str(name_of_csv_1h)))
+
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
     sender_email = "kabocha608@gmail.com"
@@ -563,19 +332,24 @@ while True:
 
     except Exception as e:
             # Print any error messages to stdout
+            print('************')
             print('Exception',e)
     finally:
             server.quit()
-# ********************** End Email 1 hour
 
-# ****************** Email For 2 Hour
-    content=(str(A_2h)+ str(Aust_2h)+str(A_base_2h)+str(Aust_base_2h))
-    msg = EmailMessage()
-    msg['Subject'] = ' 2 Hour Roc of all coins'
-    msg['To'] = 'tjjaccrypto@gmail.com'
+    # ************ Email For 2 Hour
+    msg = MIMEMultipart()
+    body_part = MIMEText('plain')
+    msg['Subject'] = '2 Hour Roc of all coins'
+    msg['To'] = 'developmentmode232@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
-    msg.set_content(str(A_2h)+ str(Aust_2h)+str(A_base_2h)+str(Aust_base_2h))
-    print('msg',msg)
+    # Add body to email
+    msg.attach(body_part)
+    # open and read the CSV file in binary
+    with open(str(name_of_csv_2h),'rb') as file:
+    # Attach the file with filename to the email
+        msg.attach(MIMEApplication(file.read(), Name=str(name_of_csv_2h)))
+
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
     sender_email = "kabocha608@gmail.com"
@@ -592,19 +366,25 @@ while True:
 
     except Exception as e:
             # Print any error messages to stdout
+            print('************')
             print('Exception',e)
     finally:
             server.quit()
-# ********************** End Email 2 hour
+    
 
-# ****************** Email For 4 Hour
-    content=(str(A_4h)+ str(Aust_4h)+str(A_base_4h)+str(Aust_base_4h))
-    msg = EmailMessage()
+    # ************ Email For 4 Hour
+    msg = MIMEMultipart()
+    body_part = MIMEText('plain')
     msg['Subject'] = '4 Hour Roc of all coins'
-    msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['To'] = 'developmentmode232@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
-    msg.set_content(str(A_4h)+ str(Aust_4h)+str(A_base_4h)+str(Aust_base_4h))
-    print('msg',msg)
+    # Add body to email
+    msg.attach(body_part)
+    # open and read the CSV file in binary
+    with open(str(name_of_csv_4h),'rb') as file:
+    # Attach the file with filename to the email
+        msg.attach(MIMEApplication(file.read(), Name=str(name_of_csv_4h)))
+
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
     sender_email = "kabocha608@gmail.com"
@@ -621,19 +401,24 @@ while True:
 
     except Exception as e:
             # Print any error messages to stdout
+            print('************')
             print('Exception',e)
     finally:
             server.quit()
-# ********************** End Email 4 hour
-
-# ****************** Email For 8 Hour
-    content=(str(A_8h)+ str(Aust_8h)+str(A_base_8h)+str(Aust_base_8h))
-    msg = EmailMessage()
+    
+    # ************ Email For 8 Hour
+    msg = MIMEMultipart()
+    body_part = MIMEText('plain')
     msg['Subject'] = '8 Hour Roc of all coins'
-    msg['To'] = 'tjjaccrypto@gmail.com'
+    msg['To'] = 'developmentmode232@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
-    msg.set_content(str(A_8h)+ str(Aust_8h)+str(A_base_8h)+str(Aust_base_8h))
-    print('msg',msg)
+    # Add body to email
+    msg.attach(body_part)
+    # open and read the CSV file in binary
+    with open(str(name_of_csv_8h),'rb') as file:
+    # Attach the file with filename to the email
+        msg.attach(MIMEApplication(file.read(), Name=str(name_of_csv_8h)))
+
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
     sender_email = "kabocha608@gmail.com"
@@ -650,18 +435,24 @@ while True:
 
     except Exception as e:
             # Print any error messages to stdout
+            print('************')
             print('Exception',e)
     finally:
             server.quit()
-# ********************** End Email 8 hour
-# ****************** Email For 24 Hour
-    content=(str(A_24h)+ str(Aust_24h)+str(A_base_24h)+str(Aust_base_24h))
-    msg = EmailMessage()
-    msg['Subject'] = '24 Hour Roc of all coins'
-    msg['To'] = 'tjjaccrypto@gmail.com'
+
+    # ************ Email For 24 Hour
+    msg = MIMEMultipart()
+    body_part = MIMEText('plain')
+    msg['Subject'] = '1 Hour Roc of all coins'
+    msg['To'] = 'developmentmode232@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
-    msg.set_content(content)
-    print('msg',msg)
+    # Add body to email
+    msg.attach(body_part)
+    # open and read the CSV file in binary
+    with open(str(name_of_csv_24h),'rb') as file:
+    # Attach the file with filename to the email
+        msg.attach(MIMEApplication(file.read(), Name=str(name_of_csv_24h)))
+
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
     sender_email = "kabocha608@gmail.com"
@@ -678,19 +469,25 @@ while True:
 
     except Exception as e:
             # Print any error messages to stdout
+            print('************')
             print('Exception',e)
     finally:
             server.quit()
-# ********************** End Email 24 hour
+    
 
-# ****************** Email For 2 day
-    content=(str(A_2d)+ str(Aust_2d)+str(A_base_2d)+str(Aust_base_2d))
-    msg = EmailMessage()
-    msg['Subject'] = ' Two Day Roc of all coins'
-    msg['To'] = 'tjjaccrypto@gmail.com'
+    # ************ Email For 2 Days
+    msg = MIMEMultipart()
+    body_part = MIMEText('plain')
+    msg['Subject'] = '2 Days Roc of all coins'
+    msg['To'] = 'developmentmode232@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
-    msg.set_content(str(A_2d)+ str(Aust_2d)+str(A_base_2d)+str(Aust_base_2d))
-    print('msg',msg)
+    # Add body to email
+    msg.attach(body_part)
+    # open and read the CSV file in binary
+    with open(str(name_of_csv_2d),'rb') as file:
+    # Attach the file with filename to the email
+        msg.attach(MIMEApplication(file.read(), Name=str(name_of_csv_2d)))
+
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
     sender_email = "kabocha608@gmail.com"
@@ -707,19 +504,25 @@ while True:
 
     except Exception as e:
             # Print any error messages to stdout
+            print('************')
             print('Exception',e)
     finally:
             server.quit()
-# ********************** End Email 2 day
+    
 
-# ****************** Email For 3 Day
-    content=(str(A_3d)+ str(Aust_3d)+str(A_base_3d)+str(Aust_base_3d))
-    msg = EmailMessage()
-    msg['Subject'] = '3 Day Roc of all coins'
-    msg['To'] = 'tjjaccrypto@gmail.com'
+    # ************ Email For 3 Days
+    msg = MIMEMultipart()
+    body_part = MIMEText('plain')
+    msg['Subject'] = '3 Days Roc of all coins'
+    msg['To'] = 'developmentmode232@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
-    msg.set_content(str(A_3d)+ str(Aust_3d)+str(A_base_3d)+str(Aust_base_3d))
-    print('msg',msg)
+    # Add body to email
+    msg.attach(body_part)
+    # open and read the CSV file in binary
+    with open(str(name_of_csv_3d),'rb') as file:
+    # Attach the file with filename to the email
+        msg.attach(MIMEApplication(file.read(), Name=str(name_of_csv_3d)))
+
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
     sender_email = "kabocha608@gmail.com"
@@ -736,19 +539,24 @@ while True:
 
     except Exception as e:
             # Print any error messages to stdout
+            print('************')
             print('Exception',e)
     finally:
             server.quit()
-# ********************** End Email 3 day
 
-# ****************** Email For 5 day
-    content=(str(A_5d)+ str(Aust_5d)+str(A_base_5d)+str(Aust_base_5d))
-    msg = EmailMessage()
-    msg['Subject'] = '5 Day Roc of all coins'
-    msg['To'] = 'tjjaccrypto@gmail.com'
+    # ************ Email For 5 Days
+    msg = MIMEMultipart()
+    body_part = MIMEText('plain')
+    msg['Subject'] = '5 Days Roc of all coins'
+    msg['To'] = 'developmentmode232@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
-    msg.set_content(str(A_5d)+ str(Aust_5d)+str(A_base_5d)+str(Aust_base_5d))
-    print('msg',msg)
+    # Add body to email
+    msg.attach(body_part)
+    # open and read the CSV file in binary
+    with open(str(name_of_csv_5d),'rb') as file:
+    # Attach the file with filename to the email
+        msg.attach(MIMEApplication(file.read(), Name=str(name_of_csv_5d)))
+
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
     sender_email = "kabocha608@gmail.com"
@@ -765,16 +573,10 @@ while True:
 
     except Exception as e:
             # Print any error messages to stdout
+            print('************')
             print('Exception',e)
     finally:
             server.quit()
-# ********************** End Email 5 Day
-   
-    # print(A_base)
-    # print(Aust_table)
-    # last_price= r.json()1111
-    index +=1
     print('******************************* End Loop *****************************')
-    time.sleep(10)
 
-
+    
