@@ -307,7 +307,7 @@ while True:
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
     msg['Subject'] = '1 Hour Roc of all coins'
-    msg['To'] = 'developmentmode232@gmail.com'
+    msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
     msg.attach(body_part)
@@ -341,7 +341,7 @@ while True:
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
     msg['Subject'] = '2 Hour Roc of all coins'
-    msg['To'] = 'developmentmode232@gmail.com'
+    msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
     msg.attach(body_part)
@@ -376,7 +376,7 @@ while True:
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
     msg['Subject'] = '4 Hour Roc of all coins'
-    msg['To'] = 'developmentmode232@gmail.com'
+    msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
     msg.attach(body_part)
@@ -410,7 +410,7 @@ while True:
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
     msg['Subject'] = '8 Hour Roc of all coins'
-    msg['To'] = 'developmentmode232@gmail.com'
+    msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
     msg.attach(body_part)
@@ -444,7 +444,7 @@ while True:
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
     msg['Subject'] = '1 Hour Roc of all coins'
-    msg['To'] = 'developmentmode232@gmail.com'
+    msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
     msg.attach(body_part)
@@ -479,7 +479,7 @@ while True:
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
     msg['Subject'] = '2 Days Roc of all coins'
-    msg['To'] = 'developmentmode232@gmail.com'
+    msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
     msg.attach(body_part)
@@ -514,7 +514,7 @@ while True:
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
     msg['Subject'] = '3 Days Roc of all coins'
-    msg['To'] = 'developmentmode232@gmail.com'
+    msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
     msg.attach(body_part)
@@ -548,7 +548,7 @@ while True:
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
     msg['Subject'] = '5 Days Roc of all coins'
-    msg['To'] = 'developmentmode232@gmail.com'
+    msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
     msg.attach(body_part)
