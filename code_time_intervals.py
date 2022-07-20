@@ -118,7 +118,7 @@ while True:
         
         # print(temp)
         # print(type(temp))
-        return_data=requests.get(url = 'https://api.binance.com/api/v3/ticker?symbols='+temp+'&windowSize=4h')
+        return_data=requests.get(url = 'https://api.binance.com/api/v3/ticker?symbols='+temp+'&windowSize=8h')
         print(return_data.json())
         data_8h+= return_data.json()
         if index == 10:
@@ -223,26 +223,26 @@ while True:
     # print(data)
     # print(type(data))
     # *************** Sorted List For 1 Hour
-    sorted_list=sorted(data, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+    sorted_list=sorted(data, key=lambda x: abs(float(x['priceChangePercent'])), reverse=True)
      # *************** Sorted List For 2 Hour
-    sorted_list_2h=sorted(data_2h, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+    sorted_list_2h=sorted(data_2h, key=lambda x: abs(float(x['priceChangePercent'])), reverse=True)
     
      # *************** Sorted List For 4 Hour
-    sorted_list_4h=sorted(data_4h, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+    sorted_list_4h=sorted(data_4h, key=lambda x: abs(float(x['priceChangePercent'])), reverse=True)
 
     # *************** Sorted List For 8 Hour
-    sorted_list_8h=sorted(data_8h, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+    sorted_list_8h=sorted(data_8h, key=lambda x: abs(float(x['priceChangePercent'])), reverse=True)
 
     # *************** Sorted List For 24 Hour
-    sorted_list_24h=sorted(data_24h, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+    sorted_list_24h=sorted(data_24h, key=lambda x: abs(float(x['priceChangePercent'])), reverse=True)
      # *************** Sorted List For 2 day
-    sorted_list_2d=sorted(data_2d, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+    sorted_list_2d=sorted(data_2d, key=lambda x: abs(float(x['priceChangePercent'])), reverse=True)
     
      # *************** Sorted List For 3 day
-    sorted_list_3d=sorted(data_3d, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+    sorted_list_3d=sorted(data_3d, key=lambda x: abs(float(x['priceChangePercent'])), reverse=True)
 
     # *************** Sorted List For 5 day
-    sorted_list_5d=sorted(data_5d, key=lambda x: abs(float(x['priceChange'])), reverse=True)
+    sorted_list_5d=sorted(data_5d, key=lambda x: abs(float(x['priceChangePercent'])), reverse=True)
 
 
 
@@ -443,7 +443,7 @@ while True:
     # ************ Email For 24 Hour
     msg = MIMEMultipart()
     body_part = MIMEText('plain')
-    msg['Subject'] = '1 Hour Roc of all coins'
+    msg['Subject'] = '24 Hour Roc of all coins'
     msg['To'] = 'tjjaccrypto@gmail.com'
     msg['From'] = 'kabocha608@gmail.com'
     # Add body to email
