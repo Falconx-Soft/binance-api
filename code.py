@@ -16,7 +16,7 @@ while True:
     URL = "https://api.binance.com/api/v3/ticker/price"
   
     # location given here
-
+    # test comment
     
     # defining a params dict for the parameters to be sent to the API
     
